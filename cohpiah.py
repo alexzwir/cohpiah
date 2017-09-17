@@ -157,14 +157,17 @@ def type_token(texto):
 				#print("terceiro loop")
 				palavras_totais = palavras_totais + 1
 				contador_caracter = contador_caracter + len(p)
-				print("A palavra número -",palavras_totais ,"é: ",p)
+				#print("A palavra número -",palavras_totais ,"é: ",p)
 				lista_de_palavras_totais.append(p)
 				# print("O número de caracter é: ",len(p) )
 				# print(contador_caracter)
 				# print(palavras_totais)
 
 	# return(contador_caracter/palavras_totais)
-	print(lista_de_palavras_totais)
+	quantidade_de_palavras_texto = len(lista_de_palavras_totais)
+	quantidade_de_palavras_unicas = n_palavras_unicas(lista_de_palavras_totais)
+	conta_type_token = quantidade_de_palavras_unicas/quantidade_de_palavras_texto
+	return conta_type_token
 
 	
 
