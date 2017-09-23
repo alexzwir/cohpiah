@@ -327,7 +327,7 @@ def compara_assinatura(as_a, as_b):
     	#print("A somatoria é ", somatoria)
     grau_de_similaridade = somatoria/6
 
-    return grau_de_similaridade
+    return abs(grau_de_similaridade)
 
 def calcula_assinatura(texto):
     '''IMPLEMENTAR. Essa funcao recebe um texto e deve devolver a assinatura do texto.'''
@@ -355,20 +355,47 @@ def avalia_textos(textos, ass_cp):
     textos = textos
     assinatura_target = ass_cp
     assinaturas_textos = []
-
+    lista_grau_de_similaridade = []
+    dicionario_do_grau_de_similaridade = {}
+    valor_minimo = {}
 
     for texto in textos:
     	assinatura_texto = calcula_assinatura(texto)
     	assinaturas_textos.append(assinatura_texto)
-    print(assinaturas_textos)
+    
+    for ass in assinaturas_textos:	
+    	grau_de_similaridade = compara_assinatura(assinatura_target,ass)
+    	lista_grau_de_similaridade.append(grau_de_similaridade)
+
+
+
+    i=1
+    for grau in lista_grau_de_similaridade:
+    	dicionario_do_grau_de_similaridade[i] = grau
+    	i = i + 1
+
+    valor_minimo = min(dicionario_do_grau_de_similaridade.items(), key=lambda x: x[1])
+
+    return(valor_minimo[0])
+
+     
 
     
 
-
+    
 def main():
+
+	assinatura_teste = [4.79, 0.72, 0.56, 80.5, 2.5, 31.6]
 	assinatura_target = [1,2,3,4,5,6]
 	textos = ["Python é 42. Senão fosse 42, seria 42^2.Valeu =].","Python é 42. Senão fosse 42, seria 42^2.Valeu =].","Python é 42. Senão fosse 42, seria 42^2.Valeu =]."]
+	textos_teste = ["Navegadores antigos tinham uma frase gloriosa:'Navegar é preciso; viver não é preciso'. Quero para mim o espírito [d]esta frase, transformada a forma para a casar como eu sou: Viver não é necessário; o que é necessário é criar. Não conto gozar a minha vida; nem em gozá-la penso. Só quero torná-la grande,ainda que para isso tenha de ser o meu corpo e a (minha alma) a lenha desse fogo. Só quero torná-la de toda a humanidade;ainda que para isso tenha de a perder como minha. Cada vez mais assim penso.Cada vez mais ponho da essência anímica do meu sangueo propósito impessoal de engrandecer a pátria e contribuirpara a evolução da humanidade.É a forma que em mim tomou o misticismo da nossa Raça.", "Voltei-me para ela; Capitu tinha os olhos no chão. Ergueu-os logo, devagar, e ficamos a olhar um para o outro... Confissão de crianças, tu valias bem duas ou três páginas, mas quero ser poupado. Em verdade, não falamos nada; o muro falou por nós. Não nos movemos, as mãos é que se estenderam pouco a pouco, todas quatro, pegando-se, apertando-se, fundindo-se. Não marquei a hora exata daquele gesto. Devia tê-la marcado; sinto a falta de uma nota escrita naquela mesma noite, e que eu poria aqui com os erros de ortografia que trouxesse, mas não traria nenhum, tal era a diferença entre o estudante e o adolescente. Conhecia as regras do escrever, sem suspeitar as do amar; tinha orgias de latim e era virgem de mulheres.", "NOSSA alegria diante dum sistema metafisico, nossa satisfação em presença duma construção do pensamento, em que a organização espiritual do mundo se mostra num conjunto lógico, coerente a harmônico, sempre dependem eminentemente da estética; têm a mesma origem que o prazer, que a alta satisfação, sempre serena afinal, que a atividade artística nos proporciona quando cria a ordem e a forma a nos permite abranger com a vista o caos da vida, dando-lhe transparência."]
 
-	avalia_textos(textos,assinatura_target)
+	#avalia_textos(textos,assinatura_target)
+	print(avalia_textos(textos_teste,assinatura_teste))
+
+
+
+
+	
 
 main()
